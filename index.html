@@ -1,0 +1,674 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Ryan Sweigart</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=IBM+Plex+Mono:wght@300;400;500&display=swap"
+            rel="stylesheet"
+        />
+
+        <style>
+            :root {
+                --bg-primary: #ffffff;
+                --bg-secondary: #f8f9fa;
+                --text-primary: #000000;
+                --text-secondary: #000000;
+                --accent: #1a1a1a;
+                --accent-dim: #2a2a2a;
+                --border: #e5e7eb;
+            }
+
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+
+            body {
+                font-family: "IBM Plex Mono", monospace;
+                background: var(--bg-primary);
+                color: var(--text-primary);
+                line-height: 1.7;
+                overflow-x: hidden;
+            }
+
+            /* Header */
+            header {
+                position: fixed;
+                top: 0;
+                width: 100%;
+                background: rgba(255, 255, 255, 0.95);
+                backdrop-filter: blur(10px);
+                border-bottom: 1px solid var(--border);
+                z-index: 1000;
+                animation: slideDown 0.6s ease-out;
+            }
+
+            @keyframes slideDown {
+                from {
+                    transform: translateY(-100%);
+                }
+                to {
+                    transform: translateY(0);
+                }
+            }
+
+            nav {
+                max-width: 1200px;
+                margin: 0 auto;
+                padding: 1.5rem 2rem;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+            .logo {
+                font-family: "DM Serif Display", serif;
+                font-size: 1.5rem;
+                font-style: italic;
+                color: var(--text-primary);
+                letter-spacing: -0.02em;
+            }
+
+            .nav-links {
+                display: flex;
+                gap: 2.5rem;
+                list-style: none;
+            }
+
+            .nav-links a {
+                color: var(--text-secondary);
+                text-decoration: none;
+                font-size: 0.875rem;
+                font-weight: 400;
+                transition: color 0.3s ease;
+                position: relative;
+            }
+
+            .nav-links a::after {
+                content: "";
+                position: absolute;
+                bottom: -4px;
+                left: 0;
+                width: 0;
+                height: 1px;
+                background: var(--text-primary);
+                transition: width 0.3s ease;
+            }
+
+            .nav-links a:hover {
+                color: var(--text-primary);
+            }
+
+            .nav-links a:hover::after {
+                width: 100%;
+            }
+
+            /* Main container */
+            main {
+                max-width: 1200px;
+                margin: 0 auto;
+                padding: 6rem 2rem 2rem;
+            }
+
+            section {
+                min-height: 100vh;
+                padding: 4rem 0;
+                opacity: 0;
+                transform: translateY(30px);
+                animation: fadeInUp 0.8s ease-out forwards;
+            }
+
+            section:nth-child(2) {
+                animation-delay: 0.2s;
+            }
+            section:nth-child(3) {
+                animation-delay: 0.4s;
+            }
+            section:nth-child(4) {
+                animation-delay: 0.6s;
+            }
+
+            @keyframes fadeInUp {
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+
+            h2 {
+                font-family: "DM Serif Display", serif;
+                font-size: 3.5rem;
+                font-style: italic;
+                margin-bottom: 3rem;
+                color: var(--text-primary);
+                letter-spacing: -0.02em;
+            }
+
+            /* About Section */
+            .about-content {
+                display: grid;
+                grid-template-columns: 250px 1fr;
+                gap: 3rem;
+                align-items: start;
+            }
+
+            .profile-image {
+                width: 250px;
+                height: 250px;
+                background: linear-gradient(135deg, #e5e7eb, #d1d5db);
+                border-radius: 4px;
+                position: relative;
+                overflow: hidden;
+            }
+
+            .profile-image::before {
+                content: "YOUR PHOTO HERE";
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                font-size: 0.75rem;
+                color: #6b7280;
+                font-weight: 500;
+                text-align: center;
+                line-height: 1.4;
+            }
+
+            .bio {
+                font-size: 1.125rem;
+                line-height: 1.8;
+                color: var(--text-secondary);
+                margin-bottom: 2rem;
+            }
+
+            .bio p {
+                margin-bottom: 1.5rem;
+            }
+
+            .skills {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 1rem;
+                margin-bottom: 2rem;
+            }
+
+            .skill-tag {
+                padding: 0.5rem 1rem;
+                background: var(--bg-secondary);
+                border: 1px solid var(--border);
+                border-radius: 4px;
+                font-size: 0.875rem;
+                color: var(--text-primary);
+                transition: all 0.3s ease;
+            }
+
+            .skill-tag:hover {
+                border-color: var(--text-primary);
+                transform: translateY(-2px);
+            }
+
+            .social-links {
+                display: flex;
+                gap: 1.5rem;
+                margin-top: 2rem;
+            }
+
+            .social-link {
+                display: inline-flex;
+                align-items: center;
+                gap: 0.5rem;
+                padding: 0.75rem 1.5rem;
+                background: var(--text-primary);
+                border: 1px solid var(--text-primary);
+                border-radius: 4px;
+                color: var(--bg-primary);
+                text-decoration: none;
+                font-size: 0.875rem;
+                font-weight: 500;
+                transition: all 0.3s ease;
+            }
+
+            .social-link:hover {
+                background: var(--bg-primary);
+                color: var(--text-primary);
+                transform: translateY(-2px);
+                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            }
+
+            /* Projects Section */
+            .projects-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+                gap: 2rem;
+            }
+
+            .project-card {
+                background: var(--bg-secondary);
+                border: 1px solid var(--border);
+                border-radius: 4px;
+                overflow: hidden;
+                transition: all 0.3s ease;
+                position: relative;
+            }
+
+            .project-card:hover {
+                border-color: var(--text-primary);
+                transform: translateY(-4px);
+                box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+            }
+
+            .project-image {
+                width: 100%;
+                height: 250px;
+                background: linear-gradient(135deg, #f3f4f6, #e5e7eb);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 0.875rem;
+                color: #6b7280;
+                position: relative;
+                overflow: hidden;
+            }
+
+            .project-image::before {
+                content: "";
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: linear-gradient(
+                    135deg,
+                    transparent,
+                    rgba(0, 0, 0, 0.05)
+                );
+                opacity: 0;
+                transition: opacity 0.3s ease;
+            }
+
+            .project-card:hover .project-image::before {
+                opacity: 1;
+            }
+
+            .project-info {
+                padding: 1.5rem;
+            }
+
+            .project-title {
+                font-family: "DM Serif Display", serif;
+                font-size: 1.5rem;
+                font-style: italic;
+                margin-bottom: 1rem;
+                color: var(--text-primary);
+            }
+
+            .project-description {
+                color: var(--text-secondary);
+                margin-bottom: 1.5rem;
+                font-size: 0.9375rem;
+            }
+
+            .project-link {
+                display: inline-flex;
+                align-items: center;
+                gap: 0.5rem;
+                color: var(--text-primary);
+                text-decoration: none;
+                font-size: 0.875rem;
+                font-weight: 500;
+                transition: gap 0.3s ease;
+            }
+
+            .project-link:hover {
+                gap: 0.75rem;
+            }
+
+            .project-link::after {
+                content: "→";
+                font-size: 1.125rem;
+            }
+
+            /* Resume Section */
+            .resume-container {
+                max-width: 800px;
+                margin: 0 auto;
+                text-align: center;
+            }
+
+            .resume-preview {
+                width: 100%;
+                max-width: 600px;
+                height: 400px;
+                margin: 0 auto 2rem;
+                background: var(--bg-secondary);
+                border: 1px solid var(--border);
+                border-radius: 4px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .resume-icon {
+                font-size: 4rem;
+                color: var(--text-primary);
+            }
+
+            .download-btn {
+                display: inline-flex;
+                align-items: center;
+                gap: 0.75rem;
+                padding: 1rem 2rem;
+                background: var(--text-primary);
+                color: var(--bg-primary);
+                text-decoration: none;
+                font-weight: 500;
+                border-radius: 4px;
+                transition: all 0.3s ease;
+                border: none;
+                cursor: pointer;
+                font-family: "IBM Plex Mono", monospace;
+                font-size: 0.9375rem;
+            }
+
+            .download-btn:hover {
+                background: var(--text-secondary);
+                transform: translateY(-2px);
+                box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+            }
+
+            /* Footer */
+            footer {
+                border-top: 1px solid var(--border);
+                padding: 3rem 2rem;
+                text-align: center;
+                margin-top: 4rem;
+            }
+
+            .footer-links {
+                display: flex;
+                justify-content: center;
+                gap: 2rem;
+                margin-bottom: 1.5rem;
+            }
+
+            .footer-links a {
+                color: var(--text-secondary);
+                text-decoration: none;
+                font-size: 0.875rem;
+                transition: color 0.3s ease;
+            }
+
+            .footer-links a:hover {
+                color: var(--text-primary);
+            }
+
+            .copyright {
+                color: var(--text-secondary);
+                font-size: 0.8125rem;
+            }
+
+            /* Responsive */
+            @media (max-width: 768px) {
+                .nav-links {
+                    gap: 1.5rem;
+                }
+
+                .about-content {
+                    grid-template-columns: 1fr;
+                    gap: 2rem;
+                }
+
+                .profile-image {
+                    width: 200px;
+                    height: 200px;
+                    margin: 0 auto;
+                }
+
+                h2 {
+                    font-size: 2.5rem;
+                }
+
+                .projects-grid {
+                    grid-template-columns: 1fr;
+                }
+
+                section {
+                    min-height: auto;
+                }
+            }
+
+            /* Smooth scroll */
+            html {
+                scroll-behavior: smooth;
+            }
+        </style>
+    </head>
+    <body>
+        <header>
+            <nav>
+                <div class="logo">Ryan Sweigart</div>
+                <ul class="nav-links">
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="#resume">Resume</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <main>
+            <!-- About Section -->
+            <section id="about">
+                <h2>About Me</h2>
+                <div class="about-content">
+                    <div class="profile-image"></div>
+                    <div class="bio-content">
+                        <div class="bio">
+                            <p>
+                                Hi! I'm Ryan, a
+                                <strong>full-stack engineer</strong> who loves
+                                to build. I mostly like to build tools - CLI,
+                                dev tools, etc. but my work typically involves
+                                building web and mobile applications.
+                            </p>
+                            <p>
+                                Below you'll find some of my projects as well as
+                                my GitHub and LinkedIn profiles. Feel free to
+                                reach out to me at
+                                <a href="mailto:ryansweigart3@gmail.com"
+                                    >ryansweigart3@gmail.com</a
+                                >.
+                            </p>
+                        </div>
+
+                        <div class="skills">
+                            <span class="skill-tag"
+                                >JavaScript / TypeScript</span
+                            >
+                            <span class="skill-tag">React / React Native</span>
+                            <span class="skill-tag">Node.js</span>
+                            <span class="skill-tag">Python</span>
+                            <span class="skill-tag">Go</span>
+                            <span class="skill-tag">Docker</span>
+                            <span class="skill-tag">AWS</span>
+                            <span class="skill-tag">Azure</span>
+                            <span class="skill-tag">CI/CD</span>
+                        </div>
+
+                        <div class="social-links">
+                            <a
+                                href="https://github.com/ryansweigart3"
+                                class="social-link"
+                                target="_blank"
+                            >
+                                <span>GitHub</span>
+                            </a>
+                            <a
+                                href="https://linkedin.com/in/ryan-sweigart-a3b9a3105"
+                                class="social-link"
+                                target="_blank"
+                            >
+                                <span>LinkedIn</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Projects Section -->
+            <section id="projects">
+                <h2>Projects</h2>
+                <div class="projects-grid">
+                    <div class="project-card">
+                        <div class="project-image">
+                            <span>Project Screenshot</span>
+                        </div>
+                        <div class="project-info">
+                            <h3 class="project-title">Project One</h3>
+                            <p class="project-description">
+                                A sleek web application that solves real-world
+                                problems with elegant design and performant
+                                code. Built with modern technologies and best
+                                practices.
+                            </p>
+                            <a
+                                href="https://github.com/yourusername/project-one"
+                                class="project-link"
+                                target="_blank"
+                            >
+                                View Project
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="project-card">
+                        <div class="project-image">
+                            <span>Project Screenshot</span>
+                        </div>
+                        <div class="project-info">
+                            <h3 class="project-title">Project Two</h3>
+                            <p class="project-description">
+                                An innovative tool that streamlines workflows
+                                and enhances productivity. Features responsive
+                                design and seamless user interactions.
+                            </p>
+                            <a
+                                href="https://github.com/yourusername/project-two"
+                                class="project-link"
+                                target="_blank"
+                            >
+                                View Project
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="project-card">
+                        <div class="project-image">
+                            <span>Project Screenshot</span>
+                        </div>
+                        <div class="project-info">
+                            <h3 class="project-title">Project Three</h3>
+                            <p class="project-description">
+                                A creative exploration of interactive design and
+                                animation. Pushes the boundaries of what's
+                                possible on the web.
+                            </p>
+                            <a
+                                href="https://github.com/yourusername/project-three"
+                                class="project-link"
+                                target="_blank"
+                            >
+                                View Project
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Resume Section -->
+            <section id="resume">
+                <h2>Resume</h2>
+                <div class="resume-container">
+                    <div class="resume-preview">
+                        <div class="resume-icon">📄</div>
+                        <p style="color: #6b7280">
+                            Your resume PDF will appear here
+                        </p>
+                    </div>
+                    <a href="#" class="download-btn" id="downloadBtn">
+                        <span>Download Resume</span>
+                        <span>↓</span>
+                    </a>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <div class="footer-links">
+                <a href="https://github.com/yourusername" target="_blank"
+                    >GitHub</a
+                >
+                <a href="https://linkedin.com/in/yourusername" target="_blank"
+                    >LinkedIn</a
+                >
+                <a href="mailto:your.email@example.com">Email</a>
+            </div>
+            <p class="copyright">© 2025 Your Name. All rights reserved.</p>
+        </footer>
+
+        <script>
+            // Smooth scroll with offset for fixed header
+            document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+                anchor.addEventListener("click", function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(
+                        this.getAttribute("href"),
+                    );
+                    if (target) {
+                        const offsetTop = target.offsetTop - 80;
+                        window.scrollTo({
+                            top: offsetTop,
+                            behavior: "smooth",
+                        });
+                    }
+                });
+            });
+
+            // Download button alert (replace with actual PDF link)
+            document
+                .getElementById("downloadBtn")
+                .addEventListener("click", function (e) {
+                    e.preventDefault();
+                    alert(
+                        "Add your resume PDF link to the href attribute of the download button!",
+                    );
+                    // To use: replace the href="#" with href="path/to/your/resume.pdf" and add download attribute
+                });
+
+            // Intersection Observer for scroll animations
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: "0px 0px -50px 0px",
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = "1";
+                        entry.target.style.transform = "translateY(0)";
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll("section").forEach((section) => {
+                observer.observe(section);
+            });
+        </script>
+    </body>
+</html>
